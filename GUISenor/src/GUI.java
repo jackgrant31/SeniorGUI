@@ -3,9 +3,8 @@ import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import org.jcp.xml.dsig.internal.dom.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
@@ -18,6 +17,7 @@ import org.opencv.videoio.VideoCapture;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.embed.swing.JFXPanel;
+import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -32,11 +32,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -47,7 +43,7 @@ import javafx.stage.WindowEvent;
 public class GUI extends Application{
 	VideoCapture videoCapture;
     Canvas canvas;
-    GraphicsContext g2d;
+    GraphicsContext g2d, g3d, g4d;
     Stage stage;
     AnimationTimer timer;
     String address;
@@ -73,12 +69,12 @@ public class GUI extends Application{
         g2d.setStroke(Color.GREEN);
         
         Canvas mask1 = new Canvas(320, 240);
-        GraphicsContext g3d = mask1.getGraphicsContext2D();
+        g3d = mask1.getGraphicsContext2D();
         g3d.setStroke(Color.GREEN);
         
         Canvas morph1 = new Canvas(320, 240);
-        GraphicsContext g4d = morph1.getGraphicsContext2D();
-        g3d.setStroke(Color.GREEN);
+        g4d = morph1.getGraphicsContext2D();
+        g4d.setStroke(Color.GREEN);
         
         Group group1 = new Group(mask1);
         Group group2= new Group(morph1);
@@ -141,14 +137,17 @@ public class GUI extends Application{
 		vbox.setSpacing(10);
 		vbox.getChildren().addAll(label1,label2,label3,label4,label5, combinedsliderbox, previewcolor1, previewcolor2);
 		
+		JFrameWindow frame = new JFrameWindow();
+		JPanel axesPanel = frame.returnAxes();
+		SwingNode swingNode = new SwingNode();
+		swingNode.setContent(axesPanel);
+		
 		HBox addressbox = new HBox();
 		add = new TextField();
 		Button sendButton = new Button("send");
-		addressbox.getChildren().addAll(add,sendButton);
+		addressbox.getChildren().addAll(add,sendButton,swingNode);
 		sendButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
-//		        videoCapture.release();
-//				videoCapture.open(add.getText());
 				initOpenCv();
 		    }
 		});
@@ -158,10 +157,6 @@ public class GUI extends Application{
 		title.setId("title");
 		title.setFont(new Font("Avenir", 60));
 		
-		JFrameWindow frame = new JFrameWindow();
-		final JFXPanel mainJFXPanel = new JFXPanel();
-		frame.getContentPane().add(mainJFXPanel);
-		
 		VBox leftrside = new VBox();
 		leftrside.getChildren().addAll(group1,group2);
 		
@@ -169,7 +164,7 @@ public class GUI extends Application{
 		leftlside.getChildren().addAll(group,leftrside);
 		
 		VBox leftside = new VBox();
-		leftside.getChildren().addAll(title, leftlside,addressbox);
+		leftside.getChildren().addAll(title, leftlside,addressbox, new Text("Enter 0 for webcam or enter web address of video server"));
 		
 		Scene scene = new Scene(rootPane, 1300, 720);
 		rootPane.setLeft(leftside); 
@@ -181,32 +176,7 @@ public class GUI extends Application{
         		GUI.class.getResource("file.css").toExternalForm());
         primaryStage.show();
      
-        timer = new AnimationTimer() {
-
-            Mat mat = new Mat();
-
-            @Override
-            public void handle(long now) {
-
-                videoCapture.read(mat);
-                
-                grabFrame();
-
-                Image image = mat2Image(mat);
-
-                g2d.drawImage(image, 0, 0);
-                
-                Image maskimg = mat2Image(maskmat);
-                
-                g3d.drawImage(maskimg,0,0,640,480,0,0,320,240);
-                
-                Image morphimg = mat2Image(morphmat);
-                
-                g4d.drawImage(morphimg,0,0,640,480,0,0,320,240);
-
-            }
-        };
-        timer.start();
+        
 	
 	}
 	
@@ -284,6 +254,33 @@ public class GUI extends Application{
 
             }
         });
+        
+        timer = new AnimationTimer() {
+
+            Mat mat = new Mat();
+
+            @Override
+            public void handle(long now) {
+
+                videoCapture.read(mat);
+                
+                grabFrame();
+
+                Image image = mat2Image(mat);
+
+                g2d.drawImage(image, 0, 0);
+                
+                Image maskimg = mat2Image(maskmat);
+                
+                g3d.drawImage(maskimg,0,0,640,480,0,0,320,240);
+                
+                Image morphimg = mat2Image(morphmat);
+                
+                g4d.drawImage(morphimg,0,0,640,480,0,0,320,240);
+
+            }
+        };
+        timer.start();
 
     }
 	

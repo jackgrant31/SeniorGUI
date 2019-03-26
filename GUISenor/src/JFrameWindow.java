@@ -25,25 +25,74 @@ import javax.swing.LayoutStyle;
 /*     */   
 /*     */   public JFrameWindow()
 /*     */   {
-/*     */     try
-/*     */     {
-/*  29 */       javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-/*     */     } catch (ClassNotFoundException|InstantiationException|IllegalAccessException|javax.swing.UnsupportedLookAndFeelException e) {
-/*  31 */       e.printStackTrace();
-/*     */     }
+/*     */ 
 /*     */     
-/*  34 */     initComponents();
-/*     */     
-/*  36 */     setResizable(false);
-/*  37 */     setLocationRelativeTo(null);
-/*  38 */     setVisible(true);
+/*  34 */     initComponents1();
 /*     */   }
 /*     */   
 /*     */ 
+/*     */ public JPanel returnAxes()
+{
+	return jPanelAxes;
+}
+/*     */  /*     */   private void initComponents1()
+/*     */   {
+/*  50 */     this.jPanelAxes = new JPanel();
+/*  51 */     this.jLabelXYAxis = new javax.swing.JLabel();
+/*  52 */     this.jPanelXYAxis = new JPanel();
+/*  53 */     this.jPanel_forAxis = new JPanel();
+/*     */     
+/*  58 */     setDefaultCloseOperation(3);
+/*  59 */     setTitle("JInput Joystick Test");
+/*     */     
+/*  61 */     this.jPanelAxes.setBorder(BorderFactory.createTitledBorder(null, "Axes", 0, 0, null, new Color(0, 51, 204)));
+/*     */     
+/*  63 */     this.jLabelXYAxis.setText("X Axis / Y Axis");
+/*     */     
+/*  65 */     this.jPanelXYAxis.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+/*  66 */     this.jPanelXYAxis.setPreferredSize(new java.awt.Dimension(111, 111));
+/*     */     
+/*  68 */     GroupLayout jPanelXYAxisLayout = new GroupLayout(this.jPanelXYAxis);
+/*  69 */     this.jPanelXYAxis.setLayout(jPanelXYAxisLayout);
+/*  70 */     jPanelXYAxisLayout.setHorizontalGroup(jPanelXYAxisLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 109, 32767));
+/*     */     
+/*     */ 
+/*     */ 
+/*  74 */     jPanelXYAxisLayout.setVerticalGroup(jPanelXYAxisLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 109, 32767));
+/*     */     
+/*     */ 
+/*     */ 
+/*     */ 
+/*  79 */     GroupLayout jPanel_forAxisLayout = new GroupLayout(this.jPanel_forAxis);
+/*  80 */     this.jPanel_forAxis.setLayout(jPanel_forAxisLayout);
+/*  81 */     jPanel_forAxisLayout.setHorizontalGroup(jPanel_forAxisLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 202, 32767));
+/*     */     
+/*     */ 
+/*     */ 
+/*  85 */     jPanel_forAxisLayout.setVerticalGroup(jPanel_forAxisLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 0, 32767));
+/*     */     
+/*     */ 
+/*     */ 
+/*     */ 
+/*  90 */     GroupLayout jPanelAxesLayout = new GroupLayout(this.jPanelAxes);
+/*  91 */     this.jPanelAxes.setLayout(jPanelAxesLayout);
+/*  92 */     jPanelAxesLayout.setHorizontalGroup(jPanelAxesLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanelAxesLayout.createSequentialGroup().addGroup(jPanelAxesLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanelAxesLayout.createSequentialGroup().addGap(58, 58, 58).addComponent(this.jLabelXYAxis)).addGroup(jPanelAxesLayout.createSequentialGroup().addGap(37, 37, 37).addComponent(this.jPanelXYAxis, -2, -1, -2))).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, -1, 32767).addComponent(this.jPanel_forAxis, -2, -1, -2).addContainerGap()));
+/*     */     
 /*     */ 
 /*     */ 
 /*     */ 
 /*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/* 106 */     jPanelAxesLayout.setVerticalGroup(jPanelAxesLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanelAxesLayout.createSequentialGroup().addComponent(this.jLabelXYAxis).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jPanelXYAxis, -2, -1, -2).addGap(0, 16, 32767)).addComponent(this.jPanel_forAxis, -1, -1, 32767));
+/*     */ 
+/*     */ }
 /*     */ 
 /*     */ 
 /*     */   private void initComponents()
