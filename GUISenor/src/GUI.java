@@ -40,6 +40,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.util.concurrent.*;
+import java.util.Scanner;
+import java.util.regex.*;
+
 public class GUI extends Application{
 	VideoCapture videoCapture;
     Canvas canvas;
@@ -53,10 +57,31 @@ public class GUI extends Application{
     TextField add;
     Label label1, label2, label3, label4, label5;
 
-	public static void main(String[] args)
-	{
-		launch(args);
-	}
+    private static final String IPADDRESS_PATTERN = 
+    		"^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+    		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+    		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+    		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+    	public static void main(String args[]){
+    		String host;
+    		Pattern p = Pattern.compile(IPADDRESS_PATTERN);
+    		if(args.length>0 && p.matcher(args[0]).find()){
+    			host = args[0];
+    		}else{
+    			host = "127.0.0.1";
+    		}
+    		System.out.println(host);
+    		int port = 5001;
+    		SynchronousQueue<String> queue = new SynchronousQueue<>();
+    		Client c = new Client(host,port,queue);
+    		Gamepad gp = new Gamepad(queue);
+    		GUI gui = new GUI();
+    		//gui.start(primar);
+    		gp.start();
+    		//try{gp.join();}catch(InterruptedException e){e.printStackTrace();}
+    		c.start();
+    		launch(args);
+    	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {	

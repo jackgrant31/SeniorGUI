@@ -7,5 +7,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/usr/local/Cellar/opencv/3.4.3/share/OpenCV/java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Volumes/Untitled/CS490/GroundGUI/jinput-2.0.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
