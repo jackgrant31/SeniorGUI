@@ -7,6 +7,11 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/usr/local/Cellar/opencv/3.4.3/share/OpenCV/java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Volumes/Untitled/CS490/GroundGUI/jinput-2.0.9.jar"/>
+	<classpathentry kind="lib" path="/Users/jack/git/GUISenor/GUISenor/jinput-2.0.9.jar" sourcepath="/Users/jack/git/GUISenor/GUISenor/jinput-2.0.9.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/Users/jack/git/GUISenor/GUISenor"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/jack/git/GUISenor/GUISenor/jutils-1.0.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

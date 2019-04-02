@@ -162,15 +162,10 @@ public class GUI extends Application{
 		vbox.setSpacing(10);
 		vbox.getChildren().addAll(label1,label2,label3,label4,label5, combinedsliderbox, previewcolor1, previewcolor2);
 		
-		JFrameWindow frame = new JFrameWindow();
-		JPanel axesPanel = frame.returnAxes();
-		SwingNode swingNode = new SwingNode();
-		swingNode.setContent(axesPanel);
-		
 		HBox addressbox = new HBox();
 		add = new TextField();
 		Button sendButton = new Button("send");
-		addressbox.getChildren().addAll(add,sendButton,swingNode);
+		addressbox.getChildren().addAll(add,sendButton);
 		sendButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				initOpenCv();
